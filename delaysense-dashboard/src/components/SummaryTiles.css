@@ -34,6 +34,13 @@
   font-weight: 400;
 }
 
+.tile-svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  color: inherit;
+}
+
 .tile-content {
   flex: 1;
 }
@@ -66,6 +73,10 @@
     width: 40px;
     height: 40px;
     font-size: 1rem;
+  }
+  .tile-svg {
+    width: 20px;
+    height: 20px;
   }
   .tile-value {
     font-size: 1.1rem;
