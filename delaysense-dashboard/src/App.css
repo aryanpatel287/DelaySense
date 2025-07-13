@@ -25,19 +25,22 @@ body {
   display: flex;
   flex-direction: column;
   min-width: 0;
-  margin-left: 240px;
+  margin-left: 260px;
+  border-left: 2px solid #e3edff;
+  background: #f6faff;
 }
 
 .dashboard-content {
   flex: 1;
   padding: 32px 32px 32px 32px;
-  background: #f1f1f1;
+  background: #f6faff;
   min-height: 0;
 }
 
 @media (max-width: 900px) {
   .main-area {
     margin-left: 64px;
+    border-left: 2px solid #e3edff;
   }
   .dashboard-content {
     padding: 16px;
