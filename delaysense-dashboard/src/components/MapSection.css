@@ -1,0 +1,296 @@
+.map-section {
+  padding: 2rem;
+}
+
+.section-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.section-header h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0 0 0.5rem 0;
+}
+
+.section-header p {
+  color: #718096;
+  margin: 0;
+}
+
+.map-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  min-height: 500px;
+}
+
+/* Left Side - Delay Details */
+.delay-details {
+  background: #f7fafc;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.delays-list h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0 0 1rem 0;
+}
+
+.delay-item {
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  border-left: 4px solid #e2e8f0;
+  transition: all 0.2s ease;
+}
+
+.delay-item:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.delay-item.active {
+  border-left-color: #3182ce;
+  background: #ebf8ff;
+}
+
+.delay-item.critical {
+  border-left-color: #e53e3e;
+}
+
+.delay-item.high {
+  border-left-color: #dd6b20;
+}
+
+.delay-item.medium {
+  border-left-color: #d69e2e;
+}
+
+.delay-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.truck-id {
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.severity-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.severity-badge.critical {
+  background: #fed7d7;
+  color: #e53e3e;
+}
+
+.severity-badge.high {
+  background: #fed7cc;
+  color: #dd6b20;
+}
+
+.severity-badge.medium {
+  background: #fef5e7;
+  color: #d69e2e;
+}
+
+.delay-info p {
+  font-size: 0.9rem;
+  color: #718096;
+  margin: 0.25rem 0;
+}
+
+.delay-metrics {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.delay-metrics span {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+/* Right Side - Map/Details */
+.map-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.selected-delay-details {
+  background: #f7fafc;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.detail-header h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0;
+}
+
+.status-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-badge.critical {
+  background: #fed7d7;
+  color: #e53e3e;
+}
+
+.status-badge.high {
+  background: #fed7cc;
+  color: #dd6b20;
+}
+
+.status-badge.medium {
+  background: #fef5e7;
+  color: #d69e2e;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.detail-item label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #718096;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-item span {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.recommendations h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0 0 0.75rem 0;
+}
+
+.recommendations ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.recommendations li {
+  background: white;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  border-left: 3px solid #3182ce;
+  font-size: 0.9rem;
+  color: #4a5568;
+}
+
+/* Simple Map */
+.simple-map {
+  background: #f7fafc;
+  border-radius: 8px;
+  padding: 1.5rem;
+  flex: 1;
+}
+
+.map-container {
+  position: relative;
+  height: 200px;
+  background: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem;
+}
+
+.dc-location, .store-location, .truck-position {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dc-marker, .store-marker, .truck-marker {
+  font-size: 2rem;
+}
+
+.dc-label, .store-label, .truck-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.route-line {
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  right: 20%;
+  height: 2px;
+  background: #e2e8f0;
+  z-index: 1;
+}
+
+.truck-position {
+  position: absolute;
+  top: 50%;
+  left: 60%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .map-content {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .map-section {
+    padding: 1rem;
+  }
+} 
