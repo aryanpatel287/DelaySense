@@ -4,12 +4,10 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { ReactComponent as TruckLogo } from '../truck-logo.svg';
 import { ReactComponent as DashboardIcon } from '../columns-gap.svg';
 import { ReactComponent as BoxIcon } from '../box.svg';
-import { ReactComponent as ReturnIcon } from '../return.svg';
 import { ReactComponent as AnalyticsIcon } from '../analytics.svg';
 import { ReactComponent as SettingsIcon } from '../gear.svg';
 import { ReactComponent as LogoutIcon } from '../logout-left.svg';
 import { ReactComponent as PersonIcon } from '../person.svg';
-import { ReactComponent as DelayIcon } from '../delay-icon.svg';
 
 const menuItems = [
   { label: 'Dashboard', icon: <DashboardIcon className="sidebar-svg" />, path: '/' },
