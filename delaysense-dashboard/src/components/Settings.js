@@ -1,6 +1,8 @@
 // src/components/Settings.js
 import React, { useState } from "react";
 import "./Settings.css";
+import { ReactComponent as MailIcon } from '../../mail.svg';
+import { ReactComponent as PhoneIcon } from '../../phone.svg';
 
 const Settings = () => {
   const [email, setEmail] = useState("sophia.miller@example.com");
@@ -8,6 +10,109 @@ const Settings = () => {
   const [view, setView] = useState("Store-wise");
   const [timezone, setTimezone] = useState("IST");
   const [theme, setTheme] = useState("system");
+
+  const [editing, setEditing] = useState(null); // 'email', 'phone', 'password', or null
+  const [tempEmail, setTempEmail] = useState(email);
+  const [tempPhone, setTempPhone] = useState(phone);
+  const [passwordFields, setPasswordFields] = useState({ current: '', new: '', confirm: '' });
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [passwordStrength, setPasswordStrength] = useState({ score: 0, label: '', color: '#ccc' });
+  const [passwordCriteria, setPasswordCriteria] = useState({ length: false, upper: false, lower: false, number: false, special: false });
+
+  const [emailNotif, setEmailNotif] = useState(false);
+  const [phoneNotif, setPhoneNotif] = useState(false);
+  const [pendingOtp, setPendingOtp] = useState(null); // 'email' or 'phone' or null
+  const [otp, setOtp] = useState('');
+
+  const handleSave = (field) => {
+    if (field === 'email') {
+      setEmail(tempEmail);
+    } else if (field === 'phone') {
+      setPhone(tempPhone);
+    } else if (field === 'password') {
+      setPasswordFields({ current: '', new: '', confirm: '' });
+    }
+    setEditing(null);
+  };
+
+  const handleCancel = () => {
+    setTempEmail(email);
+    setTempPhone(phone);
+    setPasswordFields({ current: '', new: '', confirm: '' });
+    setEditing(null);
+  };
+
+  const handleSaveChanges = (e) => {
+    e.preventDefault();
+    setShowConfirmation(true);
+    setTimeout(() => setShowConfirmation(false), 2500);
+  };
+
+  function checkPasswordStrength(pw) {
+    let score = 0;
+    let label = 'Too weak';
+    let color = '#e53e3e';
+    const criteria = {
+      length: pw.length >= 8,
+      upper: /[A-Z]/.test(pw),
+      lower: /[a-z]/.test(pw),
+      number: /[0-9]/.test(pw),
+      special: /[^A-Za-z0-9]/.test(pw)
+    };
+    if (criteria.length) score++;
+    if (criteria.upper) score++;
+    if (criteria.lower) score++;
+    if (criteria.number) score++;
+    if (criteria.special) score++;
+    if (score <= 2) {
+      label = 'Weak'; color = '#e53e3e';
+    } else if (score === 3) {
+      label = 'Medium'; color = '#f6ad55';
+    } else if (score >= 4) {
+      label = 'Strong'; color = '#2763eb';
+    }
+    return { score, label, color, criteria };
+  }
+
+  // Update password strength and criteria on new password change
+  const handleNewPasswordChange = (e) => {
+    const newPw = e.target.value;
+    setPasswordFields({ ...passwordFields, new: newPw });
+    const result = checkPasswordStrength(newPw);
+    setPasswordStrength(result);
+    setPasswordCriteria(result.criteria);
+  };
+
+  const handleToggleNotif = (type) => {
+    // Only require OTP when enabling
+    if ((type === 'email' && !emailNotif) || (type === 'phone' && !phoneNotif)) {
+      setPendingOtp(type);
+      setOtp('');
+    } else {
+      // Directly disable without OTP
+      if (type === 'email') setEmailNotif(false);
+      if (type === 'phone') setPhoneNotif(false);
+      setPendingOtp(null);
+      setOtp('');
+    }
+  };
+  const handleConfirmOtp = (type) => {
+    if (otp.length === 6) { // Simulate OTP check
+      if (type === 'email') setEmailNotif(!emailNotif);
+      if (type === 'phone') setPhoneNotif(!phoneNotif);
+      setPendingOtp(null);
+      setOtp('');
+    } else {
+      alert('Please enter a valid 6-digit OTP');
+    }
+  };
+
+  const TIMEZONES = [
+    'UTC', 'GMT', 'Europe/London', 'Europe/Paris', 'Europe/Berlin', 'Europe/Moscow',
+    'Asia/Kolkata', 'Asia/Shanghai', 'Asia/Tokyo', 'Asia/Singapore', 'Asia/Dubai',
+    'Australia/Sydney', 'America/New_York', 'America/Chicago', 'America/Denver',
+    'America/Los_Angeles', 'America/Sao_Paulo', 'Africa/Johannesburg', 'Pacific/Auckland'
+  ];
 
   return (
     <div className="settings-container">
@@ -18,30 +123,176 @@ const Settings = () => {
         <div className="settings-row">
           <div className="settings-label-block">
             <label>Email</label>
-            <span className="settings-value">{email}</span>
+            {editing === 'email' ? (
+              <>
+                <input
+                  type="email"
+                  value={tempEmail}
+                  onChange={e => setTempEmail(e.target.value)}
+                  autoFocus
+                />
+                <div style={{ marginTop: 8 }}>
+                  <button className="settings-edit-btn" onClick={() => handleSave('email')}>Save</button>
+                  <button className="settings-edit-btn" onClick={handleCancel} style={{ marginLeft: 8 }}>Cancel</button>
+                </div>
+              </>
+            ) : (
+              <span className="settings-value">{email}</span>
+            )}
           </div>
-          <button className="settings-edit-btn">Edit</button>
+          {editing !== 'email' && (
+            <button className="settings-edit-btn" onClick={() => setEditing('email')}>Edit</button>
+          )}
         </div>
         <div className="settings-row">
           <div className="settings-label-block">
             <label>Phone</label>
-            <span className="settings-value">{phone}</span>
+            {editing === 'phone' ? (
+              <>
+                <input
+                  type="tel"
+                  value={tempPhone}
+                  onChange={e => setTempPhone(e.target.value)}
+                  autoFocus
+                />
+                <div style={{ marginTop: 8 }}>
+                  <button className="settings-edit-btn" onClick={() => handleSave('phone')}>Save</button>
+                  <button className="settings-edit-btn" onClick={handleCancel} style={{ marginLeft: 8 }}>Cancel</button>
+                </div>
+              </>
+            ) : (
+              <span className="settings-value">{phone}</span>
+            )}
           </div>
-          <button className="settings-edit-btn">Edit</button>
+          {editing !== 'phone' && (
+            <button className="settings-edit-btn" onClick={() => setEditing('phone')}>Edit</button>
+          )}
         </div>
         <div className="settings-row">
           <div className="settings-label-block">
             <label>Password</label>
-            <span className="settings-value">********</span>
+            {editing === 'password' ? (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <input
+                  type="password"
+                  placeholder="Current Password"
+                  value={passwordFields.current}
+                  onChange={e => setPasswordFields({ ...passwordFields, current: e.target.value })}
+                  autoFocus
+                />
+                <input
+                  type="password"
+                  placeholder="New Password"
+                  value={passwordFields.new}
+                  onChange={handleNewPasswordChange}
+                />
+                {/* Password strength meter */}
+                {passwordFields.new && (
+                  <>
+                    <div className="password-strength-meter">
+                      <div
+                        className="password-strength-bar"
+                        style={{ background: passwordStrength.color, width: `${passwordStrength.score * 20}%` }}
+                      ></div>
+                      <span className="password-strength-label" style={{ color: passwordStrength.color, marginLeft: 8 }}>
+                        {passwordStrength.label}
+                      </span>
+                    </div>
+                    <ul className="password-criteria-list">
+                      <li className={passwordCriteria.length ? 'met' : ''}>
+                        {passwordCriteria.length ? '✔' : '✖'} At least 8 characters
+                      </li>
+                      <li className={passwordCriteria.upper ? 'met' : ''}>
+                        {passwordCriteria.upper ? '✔' : '✖'} Uppercase letter
+                      </li>
+                      <li className={passwordCriteria.lower ? 'met' : ''}>
+                        {passwordCriteria.lower ? '✔' : '✖'} Lowercase letter
+                      </li>
+                      <li className={passwordCriteria.number ? 'met' : ''}>
+                        {passwordCriteria.number ? '✔' : '✖'} Number
+                      </li>
+                      <li className={passwordCriteria.special ? 'met' : ''}>
+                        {passwordCriteria.special ? '✔' : '✖'} Special character
+                      </li>
+                    </ul>
+                  </>
+                )}
+                <input
+                  type="password"
+                  placeholder="Confirm New Password"
+                  value={passwordFields.confirm}
+                  onChange={e => setPasswordFields({ ...passwordFields, confirm: e.target.value })}
+                />
+                <div style={{ marginTop: 8 }}>
+                  <button
+                    className="settings-edit-btn"
+                    onClick={() => handleSave('password')}
+                    disabled={passwordStrength.label !== 'Strong'}
+                    style={{ opacity: passwordStrength.label === 'Strong' ? 1 : 0.5 }}
+                  >
+                    Save
+                  </button>
+                  <button className="settings-edit-btn" onClick={handleCancel} style={{ marginLeft: 8 }}>Cancel</button>
+                </div>
+              </div>
+            ) : (
+              <span className="settings-value">********</span>
+            )}
           </div>
-          <button className="settings-edit-btn">Change Password</button>
+          {editing !== 'password' && (
+            <button className="settings-edit-btn" onClick={() => setEditing('password')}>Change Password</button>
+          )}
         </div>
       </section>
 
       <section>
         <h3>Notifications</h3>
-        <label><input type="checkbox" /> Email notifications</label>
-        <label><input type="checkbox" /> Phone notifications</label>
+        <div className="notif-row">
+          <span className="notif-icon-label"><MailIcon className="notif-svg" /> Email notifications</span>
+          <button
+            className={`notif-enable-btn${emailNotif ? ' enabled' : ''}`}
+            onClick={() => handleToggleNotif('email')}
+          >
+            {emailNotif ? 'Disable' : 'Enable'}
+          </button>
+        </div>
+        {pendingOtp === 'email' && (
+          <div className="otp-row">
+            <span className="otp-prompt">Enter OTP sent to your email</span>
+            <input
+              className="otp-input"
+              type="text"
+              maxLength={6}
+              placeholder="Enter OTP"
+              value={otp}
+              onChange={e => setOtp(e.target.value.replace(/\D/g, ''))}
+            />
+            <button className="settings-edit-btn" onClick={() => handleConfirmOtp('email')}>Confirm</button>
+          </div>
+        )}
+        <div className="notif-row">
+          <span className="notif-icon-label"><PhoneIcon className="notif-svg" /> Phone notifications</span>
+          <button
+            className={`notif-enable-btn${phoneNotif ? ' enabled' : ''}`}
+            onClick={() => handleToggleNotif('phone')}
+          >
+            {phoneNotif ? 'Disable' : 'Enable'}
+          </button>
+        </div>
+        {pendingOtp === 'phone' && (
+          <div className="otp-row">
+            <span className="otp-prompt">Enter OTP sent to your phone</span>
+            <input
+              className="otp-input"
+              type="text"
+              maxLength={6}
+              placeholder="Enter OTP"
+              value={otp}
+              onChange={e => setOtp(e.target.value.replace(/\D/g, ''))}
+            />
+            <button className="settings-edit-btn" onClick={() => handleConfirmOtp('phone')}>Confirm</button>
+          </div>
+        )}
       </section>
 
       <section>
@@ -54,7 +305,11 @@ const Settings = () => {
         </select>
 
         <label>Timezone</label>
-        <input value={timezone} onChange={(e) => setTimezone(e.target.value)} />
+        <select value={timezone} onChange={e => setTimezone(e.target.value)}>
+          {TIMEZONES.map(tz => (
+            <option key={tz} value={tz}>{tz}</option>
+          ))}
+        </select>
       </section>
 
       <section>
@@ -65,7 +320,10 @@ const Settings = () => {
           <button onClick={() => setTheme("system")}>System</button>
         </div>
       </section>
-      <button className="save-btn">Save Changes</button>
+      <button className="save-btn" onClick={handleSaveChanges}>Save Changes</button>
+      {showConfirmation && (
+        <div className="settings-confirm-popup">Changes saved successfully!</div>
+      )}
     </div>
   );
 };
