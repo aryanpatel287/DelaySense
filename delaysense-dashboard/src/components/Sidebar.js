@@ -11,16 +11,17 @@ import { ReactComponent as LogoutIcon } from '../logout-left.svg';
 import { ReactComponent as PersonIcon } from '../person.svg';
 import { ReactComponent as DelayIcon } from '../delay-icon.svg';
 
-const Sidebar = ({ onLogout }) => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const menuItems = [
-    { label: 'Dashboard', icon: <DashboardIcon className="sidebar-svg" />, path: '/' },
-    { label: 'SKU impact', icon: <BoxIcon className="sidebar-svg" />, path: '/sku-impact' },
-    { label: 'Analytics', icon: <AnalyticsIcon className="sidebar-svg" />, path: '/analytics' },
-    { label: 'Admin', icon: <SettingsIcon className="sidebar-svg" />, path: '/admin' },
-  ];
+const menuItems = [
+  { label: 'Dashboard', icon: <DashboardIcon className="sidebar-svg" />, path: '/' },
+  // { label: 'Delays', icon: <DelayIcon className="sidebar-svg" style={{ width: 28, height: 28 }} />, path: '/delays' },
+  { label: 'SKU impact', icon: <BoxIcon className="sidebar-svg" />, path: '/sku-impact' },
+  { label: 'Analytics', icon: <AnalyticsIcon className="sidebar-svg" />, path: '/analytics' },
+  { label: 'Admin', icon: <SettingsIcon className="sidebar-svg" />, path: '/settings' },
+];
 
+const Sidebar = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   return (
     <aside className="sidebar modern-sidebar">
       <div className="sidebar-logo-block">
@@ -32,28 +33,25 @@ const Sidebar = ({ onLogout }) => {
       </div>
       <nav className="sidebar-nav">
         <ul>
-          {menuItems.map((item, idx) => {
-            const isActive = location.pathname === item.path;
-            return (
-              <li
-                key={item.label}
-                className={`sidebar-menu-item${isActive ? ' active' : ''}`}
-                style={{ marginBottom: idx !== menuItems.length - 1 ? '16px' : '0' }}
-                onClick={() => navigate(item.path)}
-              >
-                <span className="icon">{item.icon}</span>
-                <span className="sidebar-menu-label">{item.label}</span>
-                {isActive && <span className="sidebar-menu-dot"></span>}
-              </li>
-            );
-          })}
+          {menuItems.map((item, idx) => (
+            <li
+              key={item.label}
+              className={`sidebar-menu-item${location.pathname === item.path ? ' active' : ''}`}
+              style={{ marginBottom: idx !== menuItems.length - 1 ? '16px' : '0' }}
+              onClick={() => navigate(item.path)}
+            >
+              <span className="icon">{item.icon}</span>
+              <span className="sidebar-menu-label">{item.label}</span>
+              {location.pathname === item.path && <span className="sidebar-menu-dot"></span>}
+            </li>
+          ))}
         </ul>
       </nav>
       <div className="sidebar-bottom modern-sidebar-bottom">
         <button className="sidebar-user-btn">
           <PersonIcon className="sidebar-svg user-svg" /> Manager
         </button>
-        <button className="sidebar-logout" onClick={onLogout}>
+        <button className="sidebar-logout">
           <LogoutIcon className="sidebar-svg logout-svg" /> Logout
         </button>
       </div>

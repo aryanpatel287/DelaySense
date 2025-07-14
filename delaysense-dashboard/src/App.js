@@ -2,8 +2,8 @@ import React from 'react';
 import './App.css';
 import Sidebar from './components/Sidebar';
 import Dashboard from './components/Dashboard';
-import Analytics from './pages/Analytics';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Settings from './components/Settings';  
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
@@ -13,8 +13,7 @@ function App() {
         <div className="main-area">
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/analytics" element={<Analytics />} />
-            <Route path="*" element={<Navigate to="/" />} />
+            <Route path="/settings" element={<Settings />} />
           </Routes>
         </div>
       </div>
@@ -23,3 +22,4 @@ function App() {
 }
 
 export default App;
+
