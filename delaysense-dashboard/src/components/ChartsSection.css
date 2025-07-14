@@ -1,19 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
 
 .charts-section {
-  padding: 2rem 0;
+  padding: 2rem 20px;
   font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .charts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: 1fr 1fr;
   gap: 2rem;
 }
 
 .chart-card {
   background: #fff;
-  border-radius: 12px;
+  border-radius: 18px;
   padding: 1.5rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
@@ -254,13 +254,20 @@
   margin: 0;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
+  .charts-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .charts-section {
+    padding: 1rem 8px;
+  }
   .charts-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
-  }
-  .charts-section {
-    padding: 1rem 0;
   }
   .bar-chart {
     height: 100px;

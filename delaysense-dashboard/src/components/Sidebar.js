@@ -25,7 +25,7 @@ const Sidebar = () => {
         <div className="sidebar-logo-icon"><TruckLogo className="sidebar-svg logo-svg" /></div>
         <div className="sidebar-logo-text">
           <div className="sidebar-logo-title">DelaySense</div>
-          <div className="sidebar-logo-sub">Supply Chain Monitor</div>
+          <div className="sidebar-logo-sub">#ST001</div>
         </div>
       </div>
       <nav className="sidebar-nav">

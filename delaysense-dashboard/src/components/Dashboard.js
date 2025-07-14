@@ -75,7 +75,7 @@ const Dashboard = () => {
           <MapSection delays={delays} />
         </section>
         {/* Bottom Section - Charts */}
-        <section className="charts-section">
+        <section >
           <ChartsSection delays={delays} />
         </section>
       </main>
