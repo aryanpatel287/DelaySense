@@ -22,6 +22,16 @@
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
 }
 
+.clickable-tile {
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.clickable-tile:hover {
+  box-shadow: 0 8px 30px rgba(0, 83, 226, 0.12);
+  transform: translateY(-3px) scale(1.02);
+}
+
 .tile-icon {
   width: 48px;
   height: 48px;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './Dashboard.css';
 import SummaryTiles from './SummaryTiles';
 import MapSection from './MapSection';
@@ -49,18 +49,29 @@ const Dashboard = () => {
     }
   ]);
 
+  // Ref for the Active Delays & Impact Analysis section
+  const activeDelaysRef = useRef(null);
+
+  // Handler to scroll to the Active Delays section
+  const scrollToActiveDelays = () => {
+    if (activeDelaysRef.current) {
+      activeDelaysRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
-    <div className="dashboard" style={{ background: '#f1f1f1' }}>
+    <div className="dashboard" 
+    >
       <div className="store-title" >
         {storeData.storeName}
       </div>
       <main className="dashboard-main">
         {/* Top Section - Summary Tiles */}
         <section className="summary-section">
-          <SummaryTiles storeData={storeData} delays={delays} />
+          <SummaryTiles storeData={storeData} delays={delays} onActiveDelaysClick={scrollToActiveDelays} />
         </section>
         {/* Middle Section - Map and Details */}
-        <section className="main-content-section">
+        <section className="main-content-section" ref={activeDelaysRef}>
           <MapSection delays={delays} />
         </section>
         {/* Bottom Section - Charts */}

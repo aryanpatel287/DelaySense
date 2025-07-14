@@ -31,7 +31,7 @@ const MapSection = ({ delays }) => {
   return (
     <div className="map-section">
       <div className="section-header">
-        <h2>🚛 Active Delays & Impact Analysis</h2>
+        <h2> Active Delays & Impact Analysis</h2>
         <p>Real-time monitoring of delivery delays and their impact on store operations</p>
       </div>
       
@@ -115,14 +115,14 @@ const MapSection = ({ delays }) => {
           {/* Simple Map Representation */}
           <div className="simple-map">
             <div className="map-container">
-              <div className="dc-location">
-                <span className="dc-marker">🏭</span>
-                <span className="dc-label">{selectedDelay.origin}</span>
-              </div>
-              <div className="route-line"></div>
               <div className="store-location">
                 <span className="store-marker">🏪</span>
                 <span className="store-label">Store</span>
+              </div>
+              <div className="route-line"></div>
+              <div className="dc-location">
+                <span className="dc-marker">🏭</span>
+                <span className="dc-label">{selectedDelay.origin}</span>
               </div>
               <div className="truck-position">
                 <span className="truck-marker">🚛</span>

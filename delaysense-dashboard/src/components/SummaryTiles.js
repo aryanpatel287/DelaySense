@@ -4,7 +4,7 @@ import { ReactComponent as BoxIcon } from '../box.svg';
 import { ReactComponent as CurrencyDollarIcon } from '../currency-dollar.svg';
 import { ReactComponent as TruckIcon } from '../delay-icon.svg';
 
-const SummaryTiles = ({ storeData, delays }) => {
+const SummaryTiles = ({ storeData, delays, onActiveDelaysClick }) => {
   const totalEstimatedLoss = delays.reduce((sum, delay) => sum + delay.estimatedLoss, 0);
   const totalAffectedSKUs = delays.reduce((sum, delay) => sum + delay.skuCount, 0);
   const estimatedProfit = 25000; // Mock data for estimated profit
@@ -15,7 +15,9 @@ const SummaryTiles = ({ storeData, delays }) => {
       value: storeData.currentDelays,
       icon: <TruckIcon className="tile-svg" />,
       color: '#e53e3e',
-      bgColor: '#fed7d7'
+      bgColor: '#fed7d7',
+      onClick: onActiveDelaysClick,
+      clickable: true
     },
     {
       title: 'Est. Loss Today',
@@ -43,7 +45,12 @@ const SummaryTiles = ({ storeData, delays }) => {
   return (
     <div className="summary-tiles">
       {tiles.map((tile, index) => (
-        <div key={index} className="summary-tile" style={{ borderLeftColor: tile.color }}>
+        <div
+          key={index}
+          className={`summary-tile${tile.clickable ? ' clickable-tile' : ''}`}
+          style={{ borderLeftColor: tile.color }}
+          onClick={tile.onClick}
+        >
           <div className="tile-icon" style={{ backgroundColor: tile.bgColor, color: tile.color }}>
             {tile.icon}
           </div>

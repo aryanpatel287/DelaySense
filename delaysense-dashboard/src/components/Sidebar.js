@@ -12,7 +12,7 @@ import { ReactComponent as DelayIcon } from '../delay-icon.svg';
 
 const menuItems = [
   { label: 'Dashboard', icon: <DashboardIcon className="sidebar-svg" />, active: true, content: 'Dashboard content goes here.' },
-  { label: 'Delays', icon: <DelayIcon className="sidebar-svg" style={{ width: 28, height: 28 }} />, active: false, content: 'Delays content goes here.' },
+  // { label: 'Delays', icon: <DelayIcon className="sidebar-svg" style={{ width: 28, height: 28 }} />, active: false, content: 'Delays content goes here.' },
   { label: 'SKU impact', icon: <BoxIcon className="sidebar-svg" />, active: false, content: 'SKU Impact content goes here.' },
   { label: 'Analytics', icon: <AnalyticsIcon className="sidebar-svg" />, active: false, content: 'Analytics content goes here.' },
   { label: 'Admin', icon: <SettingsIcon className="sidebar-svg" />, active: false, content: 'Admin content goes here.' },
