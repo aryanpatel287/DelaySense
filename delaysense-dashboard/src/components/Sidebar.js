@@ -10,15 +10,17 @@ import { ReactComponent as SettingsIcon } from '../gear.svg';
 import { ReactComponent as LogoutIcon } from '../logout-left.svg';
 import { ReactComponent as PersonIcon } from '../person.svg';
 import { ReactComponent as DelayIcon } from '../delay-icon.svg';
+import { ReactComponent as LightbulbIcon } from '../lightbulb.svg';
 
 const Sidebar = ({ onLogout }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const menuItems = [
     { label: 'Dashboard', icon: <DashboardIcon className="sidebar-svg" />, path: '/' },
-    { label: 'SKU impact', icon: <BoxIcon className="sidebar-svg" />, path: '/sku-impact' },
+    { label: 'SKU Impact', icon: <BoxIcon className="sidebar-svg" />, path: '/sku-impact' },
     { label: 'Analytics', icon: <AnalyticsIcon className="sidebar-svg" />, path: '/analytics' },
-    { label: 'Admin', icon: <SettingsIcon className="sidebar-svg" />, path: '/admin' },
+    { label: 'Suggestions', icon: <LightbulbIcon className="sidebar-svg" />, path: '/suggestion' },
+    { label: 'Settings', icon: <SettingsIcon className="sidebar-svg" />, path: '/admin' },
   ];
 
   return (
