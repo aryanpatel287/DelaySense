@@ -1,5 +1,6 @@
 import React from 'react';
 import './Sidebar.css';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { ReactComponent as TruckLogo } from '../truck-logo.svg';
 import { ReactComponent as DashboardIcon } from '../columns-gap.svg';
 import { ReactComponent as BoxIcon } from '../box.svg';
@@ -10,15 +11,16 @@ import { ReactComponent as LogoutIcon } from '../logout-left.svg';
 import { ReactComponent as PersonIcon } from '../person.svg';
 import { ReactComponent as DelayIcon } from '../delay-icon.svg';
 
-const menuItems = [
-  { label: 'Dashboard', icon: <DashboardIcon className="sidebar-svg" />, active: true, content: 'Dashboard content goes here.' },
-  // { label: 'Delays', icon: <DelayIcon className="sidebar-svg" style={{ width: 28, height: 28 }} />, active: false, content: 'Delays content goes here.' },
-  { label: 'SKU impact', icon: <BoxIcon className="sidebar-svg" />, active: false, content: 'SKU Impact content goes here.' },
-  { label: 'Analytics', icon: <AnalyticsIcon className="sidebar-svg" />, active: false, content: 'Analytics content goes here.' },
-  { label: 'Admin', icon: <SettingsIcon className="sidebar-svg" />, active: false, content: 'Admin content goes here.' },
-];
+const Sidebar = ({ onLogout }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const menuItems = [
+    { label: 'Dashboard', icon: <DashboardIcon className="sidebar-svg" />, path: '/' },
+    { label: 'SKU impact', icon: <BoxIcon className="sidebar-svg" />, path: '/sku-impact' },
+    { label: 'Analytics', icon: <AnalyticsIcon className="sidebar-svg" />, path: '/analytics' },
+    { label: 'Admin', icon: <SettingsIcon className="sidebar-svg" />, path: '/admin' },
+  ];
 
-const Sidebar = () => {
   return (
     <aside className="sidebar modern-sidebar">
       <div className="sidebar-logo-block">
@@ -30,24 +32,28 @@ const Sidebar = () => {
       </div>
       <nav className="sidebar-nav">
         <ul>
-          {menuItems.map((item, idx) => (
-            <li
-              key={item.label}
-              className={`sidebar-menu-item${item.active ? ' active' : ''}`}
-              style={{ marginBottom: idx !== menuItems.length - 1 ? '16px' : '0' }}
-            >
-              <span className="icon">{item.icon}</span>
-              <span className="sidebar-menu-label">{item.label}</span>
-              {item.active && <span className="sidebar-menu-dot"></span>}
-            </li>
-          ))}
+          {menuItems.map((item, idx) => {
+            const isActive = location.pathname === item.path;
+            return (
+              <li
+                key={item.label}
+                className={`sidebar-menu-item${isActive ? ' active' : ''}`}
+                style={{ marginBottom: idx !== menuItems.length - 1 ? '16px' : '0' }}
+                onClick={() => navigate(item.path)}
+              >
+                <span className="icon">{item.icon}</span>
+                <span className="sidebar-menu-label">{item.label}</span>
+                {isActive && <span className="sidebar-menu-dot"></span>}
+              </li>
+            );
+          })}
         </ul>
       </nav>
       <div className="sidebar-bottom modern-sidebar-bottom">
         <button className="sidebar-user-btn">
           <PersonIcon className="sidebar-svg user-svg" /> Manager
         </button>
-        <button className="sidebar-logout">
+        <button className="sidebar-logout" onClick={onLogout}>
           <LogoutIcon className="sidebar-svg logout-svg" /> Logout
         </button>
       </div>

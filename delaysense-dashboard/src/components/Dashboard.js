@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import './Dashboard.css';
 import SummaryTiles from './SummaryTiles';
 import MapSection from './MapSection';
-import ChartsSection from './ChartsSection';
+// import ChartsSection from './ChartsSection';
 
 const Dashboard = () => {
   const [storeData] = useState({
@@ -60,8 +60,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="dashboard" 
-    >
+    <div className="dashboard" >
       <div className="store-title" >
         {storeData.storeName}
       </div>
@@ -75,9 +74,9 @@ const Dashboard = () => {
           <MapSection delays={delays} />
         </section>
         {/* Bottom Section - Charts */}
-        <section >
+        {/* <section >
           <ChartsSection delays={delays} />
-        </section>
+        </section> */}
       </main>
     </div>
   );
