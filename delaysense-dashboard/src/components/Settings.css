@@ -139,6 +139,11 @@
   color: #fff;
   border: 1.5px solid #2763eb;
 }
+.theme-buttons button.selected {
+  background: #2763eb;
+  color: #fff;
+  border: 1.5px solid #2763eb;
+}
 
 .save-btn {
   display: block;

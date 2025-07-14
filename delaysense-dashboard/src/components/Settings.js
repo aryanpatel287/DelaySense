@@ -1,15 +1,12 @@
 // src/components/Settings.js
 import React, { useState } from "react";
 import "./Settings.css";
-import { ReactComponent as MailIcon } from '../../mail.svg';
-import { ReactComponent as PhoneIcon } from '../../phone.svg';
 
 const Settings = () => {
   const [email, setEmail] = useState("sophia.miller@example.com");
   const [phone, setPhone] = useState("(555) 123-4567");
   const [view, setView] = useState("Store-wise");
   const [timezone, setTimezone] = useState("IST");
-  const [theme, setTheme] = useState("system");
 
   const [editing, setEditing] = useState(null); // 'email', 'phone', 'password', or null
   const [tempEmail, setTempEmail] = useState(email);
@@ -23,6 +20,7 @@ const Settings = () => {
   const [phoneNotif, setPhoneNotif] = useState(false);
   const [pendingOtp, setPendingOtp] = useState(null); // 'email' or 'phone' or null
   const [otp, setOtp] = useState('');
+  const [displayPref, setDisplayPref] = useState('default');
 
   const handleSave = (field) => {
     if (field === 'email') {
@@ -248,7 +246,7 @@ const Settings = () => {
       <section>
         <h3>Notifications</h3>
         <div className="notif-row">
-          <span className="notif-icon-label"><MailIcon className="notif-svg" /> Email notifications</span>
+          <span>Email notifications</span>
           <button
             className={`notif-enable-btn${emailNotif ? ' enabled' : ''}`}
             onClick={() => handleToggleNotif('email')}
@@ -271,7 +269,7 @@ const Settings = () => {
           </div>
         )}
         <div className="notif-row">
-          <span className="notif-icon-label"><PhoneIcon className="notif-svg" /> Phone notifications</span>
+          <span>Phone notifications</span>
           <button
             className={`notif-enable-btn${phoneNotif ? ' enabled' : ''}`}
             onClick={() => handleToggleNotif('phone')}
@@ -315,9 +313,18 @@ const Settings = () => {
       <section>
         <h3>Display Preferences</h3>
         <div className="theme-buttons">
-          <button onClick={() => setTheme("light")}>Light</button>
-          <button onClick={() => setTheme("dark")}>Dark</button>
-          <button onClick={() => setTheme("system")}>System</button>
+          <button
+            className={displayPref === 'light' ? 'selected' : ''}
+            onClick={() => setDisplayPref('light')}
+          >Light</button>
+          <button
+            className={displayPref === 'dark' ? 'selected' : ''}
+            onClick={() => setDisplayPref('dark')}
+          >Dark</button>
+          <button
+            className={displayPref === 'default' ? 'selected' : ''}
+            onClick={() => setDisplayPref('default')}
+          >Default</button>
         </div>
       </section>
       <button className="save-btn" onClick={handleSaveChanges}>Save Changes</button>
