@@ -19,8 +19,8 @@ const Sidebar = ({ onLogout }) => {
     { label: 'Dashboard', icon: <DashboardIcon className="sidebar-svg" />, path: '/' },
     { label: 'SKU Impact', icon: <BoxIcon className="sidebar-svg" />, path: '/sku-impact' },
     { label: 'Analytics', icon: <AnalyticsIcon className="sidebar-svg" />, path: '/analytics' },
-    { label: 'Suggestions', icon: <LightbulbIcon className="sidebar-svg" />, path: '/suggestion' },
-    { label: 'Settings', icon: <SettingsIcon className="sidebar-svg" />, path: '/admin' },
+    { label: 'Suggestions', icon: <LightbulbIcon className="sidebar-svg" />, path: '/suggestions' },
+    { label: 'Settings', icon: <SettingsIcon className="sidebar-svg" />, path: '/settings' },
   ];
 
   return (

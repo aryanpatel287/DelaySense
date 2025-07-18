@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard';
 import Analytics from './pages/Analytics';
 import SKUImpact from './pages/SKUImpact';
 import Sugesstions from './pages/Sugesstions';
+import Settings from './pages/Settings';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Route path="/sku-impact" element={<SKUImpact />} />
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/suggestion" element={<Sugesstions />} />
+            <Route path="/settings" element={<Settings />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </div>
