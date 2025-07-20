@@ -61,8 +61,9 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard" >
-      <div className="store-title" >
+      <div className="top-bar" >
         {storeData.storeName}
+        
       </div>
       <main className="dashboard-main">
         {/* Top Section - Summary Tiles */}

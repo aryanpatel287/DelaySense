@@ -1,6 +1,7 @@
 // src/components/Settings.js
 import React, { useState } from "react";
 import "../components/Settings.css";
+import "../components/Dashboard.css";
 
 const Settings = () => {
   const [email, setEmail] = useState("sophia.miller@example.com");
@@ -114,7 +115,7 @@ const Settings = () => {
 
   return (
     <div className="settings-container">
-      <div className="settings-title">Settings</div>
+      <div className="top-bar">Settings</div>
 
       <section>
         <h3>Update Account Info</h3>

@@ -18,7 +18,7 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/sku-impact" element={<SKUImpact />} />
             <Route path="/analytics" element={<Analytics />} />
-            <Route path="/suggestion" element={<Sugesstions />} />
+            <Route path="/suggestions" element={<Sugesstions />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>

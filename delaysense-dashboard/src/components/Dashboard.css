@@ -5,12 +5,13 @@
   background: #f8fafb;
 }
 
-.store-title { 
+.top-bar { 
   background: #f8fafb; 
   padding: 20px 20px 24px 20px; 
   font-weight: 700;
   font-size: 2rem; 
   text-align: left; 
+  display: flex;
 }
 
 .dashboard-main {
