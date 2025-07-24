@@ -1,4 +1,4 @@
-# 🚀 DelaySense Masterplan
+# 🚀 DelaySense 
 A real-time delay impact and SKU prioritization platform tailored for large-scale retail logistics (e.g. Walmart).
 
 ---
@@ -83,11 +83,11 @@ loss = demand_rate x delay_time x unit_price
 | Layer    | Tools                     |
 |----------|---------------------------|
 | Frontend | React.js + Tailwind CSS   |
-| Charts   | Chart.js or Recharts      |
-| Backend  | Node.js + Express         |
+| Charts   | Chart.js                  |
+| Backend  | Node.js + Express.js      |
 | DB       | PostgreSQL / Firebase     |
 | Realtime | Socket.IO (optional)      |
-| Hosting  | Vercel (FE) + Railway     |
+| Hosting  | Vercel                    |
 
 ---
 
