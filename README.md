@@ -195,20 +195,41 @@ This will start:
 ## 📁 Project Structure
 
 delaysense-login/
-├── client/                 # React frontend
-│   ├── public/
+├── client/                      # Frontend (React)
+│   ├── public/                  # Static files like index.html, favicon
 │   ├── src/
-│   │   ├── components/     # React components
-│   │   ├── contexts/       # React contexts
-│   │   └── index.css       # Tailwind CSS
+│   │   ├── assets/             # Images, icons, logos, etc.
+│   │   ├── components/         # Reusable React components
+│   │   ├── contexts/           # React Context API providers
+│   │   ├── hooks/              # Custom React hooks
+│   │   ├── pages/              # Page components (Login, Dashboard, etc.)
+│   │   ├── services/           # API calls (axios)
+│   │   ├── utils/              # Helper functions
+│   │   ├── App.jsx             # Root app component
+│   │   └── index.js            # Entry point (ReactDOM)
+│   ├── tailwind.config.js
+│   ├── postcss.config.js
 │   ├── package.json
-│   └── tailwind.config.js
-├── server/                 # Express backend
-│   ├── index.js           # Main server file
-│   └── database.sqlite    # SQLite database (auto-created)
-├── package.json           # Root package.json
-├── env.example           # Environment variables template
-└── README.md
+│   └── vite.config.js          # Or webpack.config.js if using Webpack
+│
+├── server/                     # Backend (Node.js + Express)
+│   ├── config/                 # DB & environment setup
+│   │   └── db.js               # SQLite DB connection logic
+│   ├── controllers/           # Route logic (e.g. authController.js)
+│   ├── middlewares/           # Middleware (auth, error handlers)
+│   ├── models/                # DB models or schema helpers
+│   ├── routes/                # Express routers (auth, users)
+│   ├── services/              # Business logic (e.g. password hashing)
+│   ├── utils/                 # Helper functions (tokens, validations)
+│   ├── index.js               # Main server file (Express setup)
+│   ├── .env                   # Local environment variables
+│   └── database.sqlite        # SQLite file (auto-created)
+│
+├── .gitignore                 # Git ignore rules
+├── env.example                # Sample .env file
+├── README.md                  # Project documentation
+└── package.json               # Root package.json (optional if monorepo)
+
 
 ## 🔧 Available Scripts
 
@@ -343,4 +364,4 @@ If you encounter any issues or have questions, please open an issue on GitHub.
 
 ---
 
-**Built with ❤️ for secure authentication**
+**Built with ❤️ from ByteBuilder**
